@@ -25,6 +25,7 @@ body {
   opacity: 0.08;
   z-index: 0;
   pointer-events: none;
+  will-change: opacity;
 }
 
 .overlay {
@@ -35,9 +36,11 @@ body {
 }
 
 .glitch {
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   color: #00ffcc;
   position: relative;
+  cursor: default;
+  user-select: none;
 }
 
 .glitch::before,
@@ -48,34 +51,72 @@ body {
   width: 100%;
   overflow: hidden;
   color: #ff00ff;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(0 100% 100% 0);
 }
 
 .glitch::before {
   animation: glitchTop 2s infinite linear alternate-reverse;
+  z-index: -1;
 }
 
 .glitch::after {
   color: #00ffff;
   animation: glitchBot 1.5s infinite linear alternate-reverse;
+  z-index: -2;
 }
 
 @keyframes glitchTop {
-  0% { clip: rect(0, 9999px, 0, 0); }
-  20% { clip: rect(0, 9999px, 15px, 0); transform: translate(-2px, -2px); }
-  40% { clip: rect(0, 9999px, 25px, 0); transform: translate(2px, -1px); }
-  60% { clip: rect(0, 9999px, 15px, 0); transform: translate(-1px, 1px); }
-  80% { clip: rect(0, 9999px, 25px, 0); transform: translate(1px, -1px); }
-  100% { clip: rect(0, 9999px, 0, 0); }
+  0% {
+    clip-path: inset(0 100% 100% 0);
+    transform: translate(0);
+  }
+  20% {
+    clip-path: inset(0 0 70% 0);
+    transform: translate(-2px, -2px);
+  }
+  40% {
+    clip-path: inset(0 0 50% 0);
+    transform: translate(2px, -1px);
+  }
+  60% {
+    clip-path: inset(0 0 70% 0);
+    transform: translate(-1px, 1px);
+  }
+  80% {
+    clip-path: inset(0 0 50% 0);
+    transform: translate(1px, -1px);
+  }
+  100% {
+    clip-path: inset(0 100% 100% 0);
+    transform: translate(0);
+  }
 }
 
 @keyframes glitchBot {
-  0% { clip: rect(0, 9999px, 0, 0); }
-  20% { clip: rect(85px, 9999px, 100px, 0); transform: translate(1px, 1px); }
-  40% { clip: rect(70px, 9999px, 90px, 0); transform: translate(-1px, 2px); }
-  60% { clip: rect(90px, 9999px, 100px, 0); transform: translate(2px, -1px); }
-  80% { clip: rect(75px, 9999px, 90px, 0); transform: translate(-2px, 1px); }
-  100% { clip: rect(0, 9999px, 0, 0); }
+  0% {
+    clip-path: inset(100% 100% 0 0);
+    transform: translate(0);
+  }
+  20% {
+    clip-path: inset(30% 0 0 0);
+    transform: translate(1px, 1px);
+  }
+  40% {
+    clip-path: inset(50% 0 0 0);
+    transform: translate(-1px, 2px);
+  }
+  60% {
+    clip-path: inset(30% 0 0 0);
+    transform: translate(2px, -1px);
+  }
+  80% {
+    clip-path: inset(50% 0 0 0);
+    transform: translate(-2px, 1px);
+  }
+  100% {
+    clip-path: inset(100% 100% 0 0);
+    transform: translate(0);
+  }
 }
 
 .subtitle {
@@ -90,8 +131,18 @@ body {
   font-size: 1rem;
   color: #00ffcc;
   animation: blink 1s steps(2, start) infinite;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+.console-text:focus {
+  outline: 2px solid #00ffcc;
+  outline-offset: 4px;
 }
 
 @keyframes blink {
-  to { visibility: hidden; }
+  to {
+    visibility: hidden;
+  }
 }
