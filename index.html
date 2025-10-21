@@ -1,18 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>WELCOME TO THE WIRED</title>
-  <link rel="stylesheet" href="css.css"/>
+  <link rel="stylesheet" href="csslain.css"/>
 </head>
 <body>
   <div class="glitch-bg"></div>
   <div class="overlay">
     <h1 class="glitch" data-text="WELCOME TO THE WIRED">WELCOME TO THE WIRED</h1>
     <p class="subtitle">"The border between the real and the Wired... is disappearing."</p>
-    <p class="console-text">user@lain:~$ connect</p>
+    <p class="console-text" tabindex="0" role="button" aria-label="Conectar al Wired" >user@lain:~$ connect</p>
   </div>
+
+  <script>
+    const consoleText = document.querySelector('.console-text');
+    consoleText.addEventListener('click', () => {
+      alert('Connecting to The Wired...');
+    });
+    // Para que también funcione con teclado (accessibilidad)
+    consoleText.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        alert('Connecting to The Wired...');
+      }
+    });
+  </script>
 </body>
 </html>
+
+
 
